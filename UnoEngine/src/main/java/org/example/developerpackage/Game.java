@@ -1,10 +1,10 @@
-package org.example;
+package org.example.developerpackage;
 
 
-import org.example.cards.Card;
-import org.example.cards.ColorableCard;
-import org.example.enums.ColorSuit;
-import org.example.players.Player;
+import org.example.developerpackage.cards.Card;
+import org.example.developerpackage.cards.ColorableCard;
+import org.example.developerpackage.enums.ColorSuit;
+import org.example.developerpackage.players.Player;
 import org.example.unogame.util.IOManager;
 
 import java.io.BufferedReader;
@@ -67,6 +67,7 @@ public abstract class Game {
         shuffle(this.cards);
         distributeCards();
         this.topCard = getTopCard();
+        this.colorOfTopCard = ((ColorableCard) this.topCard).getColor();
         while (!isWinner(this.currentTurn)) {
             bufferedWriter.write(this.currentTurn.getName() + "'s" + " turn");
             bufferedWriter.newLine();
@@ -92,6 +93,12 @@ public abstract class Game {
             } else {
                 System.out.println("Choose another card !");
                 continue;
+            }
+            if(isWinner(this.currentTurn)){
+                bufferedWriter.write(this.currentTurn.getName() + " is the winner !!!");
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
+                break;
             }
             this.currentTurn = getNextPlayer();
         }

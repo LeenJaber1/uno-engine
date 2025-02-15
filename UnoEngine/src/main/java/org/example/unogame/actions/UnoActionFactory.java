@@ -1,8 +1,8 @@
 package org.example.unogame.actions;
 
-import org.example.actions.Action;
-import org.example.actions.ActionWithDecision;
-import org.example.actions.ActionWithNoDecision;
+import org.example.developerpackage.actions.Action;
+import org.example.developerpackage.actions.ActionWithDecision;
+import org.example.developerpackage.actions.ActionWithNoDecision;
 import org.example.unogame.enums.ActionsWithDecisionEnum;
 import org.example.unogame.enums.ActionsWithNoDecisionEnum;
 

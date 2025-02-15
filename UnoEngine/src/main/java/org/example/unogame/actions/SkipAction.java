@@ -1,8 +1,8 @@
 package org.example.unogame.actions;
 
-import org.example.Game;
-import org.example.actions.ActionWithNoDecision;
-import org.example.players.Player;
+import org.example.developerpackage.Game;
+import org.example.developerpackage.actions.ActionWithNoDecision;
+import org.example.developerpackage.players.Player;
 
 import java.util.List;
 

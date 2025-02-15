@@ -1,12 +1,12 @@
 package org.example.unogame;
 
-import org.example.Game;
-import org.example.actions.Action;
-import org.example.cards.*;
-import org.example.enums.CardType;
-import org.example.enums.ColorSuit;
-import org.example.enums.Number;
-import org.example.players.Player;
+import org.example.developerpackage.Game;
+import org.example.developerpackage.actions.Action;
+import org.example.developerpackage.cards.*;
+import org.example.developerpackage.enums.CardType;
+import org.example.developerpackage.enums.ColorSuit;
+import org.example.developerpackage.enums.Number;
+import org.example.developerpackage.players.Player;
 import org.example.unogame.actions.ActionFactory;
 import org.example.unogame.enums.ActionsWithDecisionEnum;
 import org.example.unogame.enums.ActionsWithNoDecisionEnum;
@@ -183,6 +183,7 @@ public class UnoGame extends Game {
         for (Card cards : this.getCards()) {
             if (cards instanceof NumberedCard) {
                 card = cards;
+                break;
             }
         }
         return card;

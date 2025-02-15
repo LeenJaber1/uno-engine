@@ -1,6 +1,6 @@
-package org.example.cards;
+package org.example.developerpackage.cards;
 
-import org.example.enums.CardType;
+import org.example.developerpackage.enums.CardType;
 
 public abstract class Card {
     private CardType cardType;

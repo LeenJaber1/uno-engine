@@ -1,10 +1,10 @@
 package org.example.unogame;
 
-import org.example.actions.Action;
-import org.example.cards.*;
-import org.example.enums.CardType;
-import org.example.enums.ColorSuit;
-import org.example.enums.Number;
+import org.example.developerpackage.actions.Action;
+import org.example.developerpackage.cards.*;
+import org.example.developerpackage.enums.CardType;
+import org.example.developerpackage.enums.ColorSuit;
+import org.example.developerpackage.enums.Number;
 
 import java.util.List;
 

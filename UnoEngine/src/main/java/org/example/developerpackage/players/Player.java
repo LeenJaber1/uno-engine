@@ -1,6 +1,6 @@
-package org.example.players;
+package org.example.developerpackage.players;
 
-import org.example.cards.Card;
+import org.example.developerpackage.cards.Card;
 
 import java.util.ArrayList;
 import java.util.List;

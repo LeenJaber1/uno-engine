@@ -1,7 +1,7 @@
-package org.example.cards;
+package org.example.developerpackage.cards;
 
-import org.example.enums.CardType;
-import org.example.enums.ColorSuit;
+import org.example.developerpackage.enums.CardType;
+import org.example.developerpackage.enums.ColorSuit;
 
 public class ColorableCard extends Card {
     private ColorSuit color;

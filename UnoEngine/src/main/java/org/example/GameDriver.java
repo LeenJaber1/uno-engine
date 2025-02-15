@@ -1,6 +1,7 @@
 package org.example;
 
-import org.example.cards.CardFactory;
+import org.example.developerpackage.Game;
+import org.example.developerpackage.cards.CardFactory;
 import org.example.unogame.UnoCardFactory;
 import org.example.unogame.UnoGame;
 import org.example.unogame.actions.ActionFactory;

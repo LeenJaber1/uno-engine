@@ -1,8 +1,8 @@
-package org.example.cards;
+package org.example.developerpackage.cards;
 
-import org.example.actions.Action;
-import org.example.enums.CardType;
-import org.example.enums.ColorSuit;
+import org.example.developerpackage.actions.Action;
+import org.example.developerpackage.enums.CardType;
+import org.example.developerpackage.enums.ColorSuit;
 
 import java.util.ArrayList;
 import java.util.List;

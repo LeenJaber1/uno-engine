@@ -1,6 +1,6 @@
-package org.example.actions;
+package org.example.developerpackage.actions;
 
-import org.example.Game;
+import org.example.developerpackage.Game;
 
 import java.io.IOException;
 

@@ -1,9 +1,9 @@
 package org.example.unogame.actions;
 
-import org.example.Game;
-import org.example.actions.ActionWithDecision;
-import org.example.enums.ColorSuit;
-import org.example.players.Player;
+import org.example.developerpackage.Game;
+import org.example.developerpackage.actions.ActionWithDecision;
+import org.example.developerpackage.enums.ColorSuit;
+import org.example.developerpackage.players.Player;
 
 import java.io.IOException;
 
