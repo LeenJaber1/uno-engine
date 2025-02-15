@@ -6,14 +6,15 @@ import org.example.enums.CardType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpecialCard extends Card {
+public class DecisionCard extends Card {
     List<Action> actions;
-    public SpecialCard(CardType cardType, List<Action> actions) {
-        super(cardType);
+
+    public DecisionCard(CardType cardType, String cardLabel, List<Action> actions) {
+        super(cardType, cardLabel);
         this.actions = actions;
     }
 
-    public SpecialCard() {
+    public DecisionCard() {
         actions = new ArrayList<>();
     }
 

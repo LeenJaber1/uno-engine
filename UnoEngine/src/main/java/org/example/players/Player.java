@@ -2,26 +2,26 @@ package org.example.players;
 
 import org.example.cards.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Player {
     private String name;
     private int numberOfCards;
-    private List<Card> currentCards;
+    private List<Card> currentCards = new ArrayList<>();
 
-    public Player(String name, int numberOfCards, List<Card> currentCards) {
+    public Player(String name, int numberOfCards) {
         this.name = name;
         this.numberOfCards = numberOfCards;
-        this.currentCards = currentCards;
     }
 
-    public void removeCard(Card card){
-        for(int  i = 0 ; i < this.currentCards.size() ; i++){
-           if(this.currentCards.get(i).equals(card)){
-               this.currentCards.remove(i);
-               return;
-           }
+    public void removeCard(Card card) {
+        for (int i = 0; i < this.currentCards.size(); i++) {
+            if (this.currentCards.get(i).equals(card)) {
+                this.currentCards.remove(i);
+                return;
+            }
         }
     }
 

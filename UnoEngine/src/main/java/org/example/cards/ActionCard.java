@@ -10,8 +10,8 @@ import java.util.List;
 public class ActionCard extends ColorableCard {
     private List<Action> actions;
 
-    public ActionCard(CardType cardType, ColorSuit color, List<Action> actions) {
-        super(cardType, color);
+    public ActionCard(CardType cardType, ColorSuit color, String cardLabel, List<Action> actions) {
+        super(cardType, cardLabel, color);
         this.actions = actions;
     }
 

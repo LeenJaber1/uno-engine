@@ -2,6 +2,8 @@ package org.example.actions;
 
 import org.example.Game;
 
-public interface ActionWithDecision extends Action{
-    void doDecision(Game game);
+import java.io.IOException;
+
+public interface ActionWithDecision extends Action {
+    String doDecision(Game game) throws IOException;
 }

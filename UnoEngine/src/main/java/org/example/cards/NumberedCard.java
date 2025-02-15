@@ -4,10 +4,11 @@ import org.example.enums.CardType;
 import org.example.enums.ColorSuit;
 import org.example.enums.Number;
 
-public class NumberedCard extends ColorableCard{
+public class NumberedCard extends ColorableCard {
     private Number number;
-    public NumberedCard(CardType cardType, ColorSuit color , Number number) {
-        super(cardType, color);
+
+    public NumberedCard(CardType cardType, String cardLabel, ColorSuit color, Number number) {
+        super(cardType, cardLabel, color);
         this.number = number;
     }
 

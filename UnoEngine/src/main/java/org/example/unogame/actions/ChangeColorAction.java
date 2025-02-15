@@ -2,15 +2,42 @@ package org.example.unogame.actions;
 
 import org.example.Game;
 import org.example.actions.ActionWithDecision;
+import org.example.enums.ColorSuit;
+import org.example.unogame.util.IOManager;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class ChangeColorAction implements ActionWithDecision {
-    @Override
-    public void doAction(Game game) {
+    private IOManager ioManager = IOManager.getInstance();
+    private BufferedWriter bufferedWriter = ioManager.getWriter();
+    private BufferedReader bufferedReader = ioManager.getReader();
 
+    @Override
+    public void doAction(Game game) throws IOException {
+        String choosenColor = doDecision(game);
+        for (ColorSuit color : ColorSuit.values()) {
+            if (choosenColor.toUpperCase().equals(color.name())) {
+                game.setColorOfTopCard(color);
+                return;
+            }
+        }
     }
 
     @Override
-    public void doDecision(Game game) {
-
+    public String doDecision(Game game) throws IOException {
+        bufferedWriter.write("Choose the color you want :");
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
+        int i = 1;
+        for (ColorSuit color : ColorSuit.values()) {
+            bufferedWriter.write(i + ". " + color.name());
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+            i++;
+        }
+        String choosenColor = bufferedReader.readLine();
+        return choosenColor;
     }
 }

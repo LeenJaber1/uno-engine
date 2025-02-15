@@ -1,8 +1,15 @@
 package org.example;
 
-import org.example.cards.Card;
-import org.example.players.Player;
 
+import org.example.cards.Card;
+import org.example.cards.ColorableCard;
+import org.example.enums.ColorSuit;
+import org.example.players.Player;
+import org.example.unogame.util.IOManager;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +22,16 @@ public abstract class Game {
     private Player currentTurn;
     private Card topCard;
     private int initialNumberOfCards = 7;
+    private int gameFlow;
+    private ColorSuit colorOfTopCard;
+
+    private IOManager ioManager = IOManager.getInstance();
+    private BufferedWriter bufferedWriter = ioManager.getWriter();
+    private BufferedReader bufferedReader = ioManager.getReader();
+
+    public Game(int gameFlow) {
+        this.gameFlow = gameFlow;
+    }
 
     //how the developer wants to create the cards
     public abstract void createDeckOfCards();
@@ -27,31 +44,98 @@ public abstract class Game {
 
     public abstract boolean isValidCardToPlace(Card card);
 
-    public abstract void showPlayerCards(Player player);
+    public abstract void showPlayerCards(Player player) throws IOException;
 
-    public abstract void showTopCard(Card card);
+    public abstract void showTopCard(Card card) throws IOException;
 
     //take input for which card to place
-    public abstract Card getChosenCard(Player player);
+    public abstract Card getChosenCard(Player player) throws IOException;
 
     public abstract Player getNextPlayer();
 
-    public void play(){
+    public abstract void doActions(Card card) throws IOException;
+
+    public abstract Card getTopCard();
+
+    public void setTopCard(Card topCard) {
+        this.topCard = topCard;
+    }
+
+    public void play() throws IOException {
+        createDeckOfCards();
+        registerPlayers();
         shuffle(this.cards);
         distributeCards();
-        while(!isWinner(this.currentTurn)){
+        this.topCard = getTopCard();
+        while (!isWinner(this.currentTurn)) {
+            bufferedWriter.write(this.currentTurn.getName() + "'s" + " turn");
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+
             showTopCard(this.topCard);
             showPlayerCards(this.currentTurn);
+
+            boolean decisionToDraw = getDecisionToDraw();
+            if (decisionToDraw) {
+                draw(this.currentTurn);
+                continue;
+            }
             Card card = getChosenCard(this.currentTurn);
-            if(isValidCardToPlace(card)){
+            if (isValidCardToPlace(card)) {
                 this.topCard = card;
+                if (card instanceof ColorableCard) {
+                    this.colorOfTopCard = ((ColorableCard) card).getColor();
+                }
                 this.currentTurn.removeCard(card);
+                this.currentTurn.setNumberOfcards(this.currentTurn.getNumberOfcards() - 1);
+                doActions(card);
+            } else {
+                System.out.println("Choose another card !");
+                continue;
             }
             this.currentTurn = getNextPlayer();
         }
-    };
+        this.ioManager.close();
+    }
 
-    public void shuffle(List<Card> cards){
+    private void registerPlayers() throws IOException {
+        bufferedWriter.write("Maximum number of players is :" + this.getMaxPlayers());
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
+        bufferedWriter.write("Enter how many players playing : ");
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
+        int num = Integer.parseInt(bufferedReader.readLine().trim());
+        for (int i = 0; i < num; i++) {
+            bufferedWriter.write("Enter player name : ");
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+            String name = bufferedReader.readLine();
+            Player player = new Player(name, this.initialNumberOfCards);
+            this.players.add(player);
+        }
+        this.currentTurn = this.players.get(0);
+    }
+
+    public void draw(Player player) {
+        Card drawnCard = this.cards.get(this.cards.size() - 1);
+        player.getCurrentCards().add(drawnCard);
+        this.cards.remove(this.cards.size() - 1);
+        player.setNumberOfcards(player.getNumberOfcards() + 1);
+    }
+
+    private boolean getDecisionToDraw() throws IOException {
+        bufferedWriter.write("Would you like to draw ? yes ? no");
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
+        String ans = bufferedReader.readLine();
+        if (ans.toLowerCase().equals("yes")) {
+            return true;
+        }
+        return false;
+    }
+
+    public void shuffle(List<Card> cards) {
         Collections.shuffle(this.cards);
     }
 
@@ -95,19 +179,27 @@ public abstract class Game {
         this.currentTurn = currentTurn;
     }
 
-    public Card getTopCard() {
-        return topCard;
-    }
-
-    public void setTopCard(Card topCard) {
-        this.topCard = topCard;
-    }
-
     public int getInitialNumberOfCards() {
         return initialNumberOfCards;
     }
 
     public void setInitialNumberOfCards(int initialNumberOfCards) {
         this.initialNumberOfCards = initialNumberOfCards;
+    }
+
+    public ColorSuit getColorOfTopCard() {
+        return colorOfTopCard;
+    }
+
+    public void setColorOfTopCard(ColorSuit colorOfTopCard) {
+        this.colorOfTopCard = colorOfTopCard;
+    }
+
+    public int getGameFlow() {
+        return gameFlow;
+    }
+
+    public void setGameFlow(int gameFlow) {
+        this.gameFlow = gameFlow;
     }
 }

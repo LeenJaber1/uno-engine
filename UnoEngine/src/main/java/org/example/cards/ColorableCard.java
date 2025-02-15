@@ -6,8 +6,8 @@ import org.example.enums.ColorSuit;
 public class ColorableCard extends Card {
     private ColorSuit color;
 
-    public ColorableCard(CardType cardType , ColorSuit color) {
-        super(cardType);
+    public ColorableCard(CardType cardType, String cardLabel, ColorSuit color) {
+        super(cardType, cardLabel);
         this.color = color;
     }
 
